@@ -1,0 +1,18 @@
+.container {
+  .socials {
+    & > div,
+    a {
+      cursor: pointer;
+      transition: 0.15s ease-in-out;
+
+      &:hover {
+        svg {
+          path {
+            transition: 0.35s ease-in-out;
+            fill: var(--orange-1, #e7853e);
+          }
+        }
+      }
+    }
+  }
+}

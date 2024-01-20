@@ -1,0 +1,102 @@
+.container {
+  .alt-spotify-icon {
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+.infinite-slider {
+  margin-left: -18px;
+  @media screen and (min-width: 1440px) {
+    margin-left: 0px;
+  }
+  .slider-bounds {
+    * {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+    }
+    --item-count: 11;
+    --item-padding: 0px;
+    --image-width: 96px;
+    --item-width: calc(var(--image-width) + var(--item-padding));
+    --slider-width: calc(1176px);
+    --top-margin: 0px;
+    --hover-increment: 0;
+    --item-height: calc(82px + var(--item-padding) + var(--top-margin));
+    --item-radius: 24px;
+    max-width: 100vw;
+    width: var(--slider-width);
+    position: relative;
+    margin: auto;
+
+    .slider {
+      height: calc(
+        var(--item-height) + (var(--item-height) * var(--hover-increment) * 2)
+      );
+      width: var(--slider-width);
+      overflow: hidden;
+      position: relative;
+      margin: auto;
+
+      .slider--inner {
+        column-gap: 12px;
+        width: 200%;
+        display: flex;
+        align-items: center;
+
+        position: absolute;
+        will-change: left;
+        animation: slider-animation 12s linear infinite;
+        @media screen and (min-width: 1024px) {
+          &:hover {
+            animation-play-state: paused;
+          }
+        }
+        @media screen and (min-width: 1440px) {
+          animation: none;
+        }
+      }
+
+      .slider-batch {
+        display: flex;
+        align-items: center;
+        float: left;
+        width: 50%;
+        column-gap: 12px;
+        .slide {
+          user-select: none;
+          width: var(--image-width);
+          padding: var(--item-padding);
+          overflow: hidden;
+          img {
+            user-select: none;
+          }
+          display: flex;
+          position: relative;
+          margin: 0px;
+          transition: all 0.2s ease-out;
+        }
+      }
+    }
+  }
+
+  @keyframes slider-animation {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: -100%;
+    }
+  }
+}
+
+.banner-image {
+  img {
+    @media screen and (max-width: 1023px) {
+      min-height: 296px !important;
+    }
+  }
+}

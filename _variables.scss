@@ -1,0 +1,31 @@
+@mixin shimmer-effect {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: animate_shimmer 0.5s;
+}
+
+@keyframes animate_shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes animate_scale-down-sm {
+  to {
+    transform: scale(0.975);
+  }
+}

@@ -1,0 +1,13 @@
+.container {
+  // display: flex;
+  position: sticky;
+  top: 0;
+  z-index: var(--header-z-index);
+  // border-bottom: 1px solid var(--grey-1);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  padding-top: 9px;
+  padding-bottom: 9px;
+  
+}

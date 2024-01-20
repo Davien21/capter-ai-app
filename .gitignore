@@ -1,0 +1,12 @@
+/node_modules
+.next/
+.swc/
+.env*
+.env
+*.log
+.DS_Store
+# sitemap.xml
+# robots.txt
+.vscode
+```
+tsconfig.tsbuildinfo
