@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
-import toaster from "./toastService";
+import { toast } from "sonner";
+// import toaster from "./toastService";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -15,7 +16,7 @@ axios.interceptors.response.use(undefined, (error: AxiosError) => {
     const message: string = error.response?.data?.message || error.message;
     if (message.toLowerCase().includes("try again")) return;
     // if (weirdMsgs.some((msg) => message.toLowerCase().includes(msg))) return;
-    toaster.error("An unexpected error occurred.");
+    toast.error("An unexpected error occurred.");
   }
 
   //

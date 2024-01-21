@@ -7,20 +7,6 @@
 
 @tailwindcss /utilities;
 
-@font-face {
-  font-family: "FPL Neu";
-  src: url("https://db.onlinewebfonts.com/t/3768fe7e044ad671128b6e970f478bf1.woff2")
-    format("woff2");
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "Bon Foyage DEMO";
-  src: url("https://db.onlinewebfonts.com/t/e2ec5dc7ac9f4e47779bf6faad4a7d40.woff2")
-    format("woff2");
-  font-weight: 400;
-}
-
 :root {
   /* Color settings */
   --black: #121212;

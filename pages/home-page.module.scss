@@ -4,6 +4,28 @@
       fill: #fff;
     }
   }
+
+  textarea {
+    border: 1px solid #000;
+    // &::placeholder {
+    padding: 10px;
+    padding-bottom: 0px;
+    // }
+    outline: none;
+  }
+  input {
+    border: 1px solid #000;
+    // &::placeholder {
+    padding: 10px;
+    // }
+    outline: none;
+  }
+  button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+  }
 }
 
 .infinite-slider {
