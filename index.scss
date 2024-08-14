@@ -1,31 +1,31 @@
 /** @format */
 @use "./variables" as variables;
 
-@tailwindcss /base;
+// import inter font
 
-@tailwindcss /components;
-
-@tailwindcss /utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 :root {
   /* Color settings */
-  --black: #121212;
+  --black: #101828;
   --black-2: #1a1a1a;
   --white: #fff;
+  --Base-White: #fff;
   --white-2: #fafafa;
-  --grey-1: #e8e8e8;
-  --grey-2: #959595;
-
+  --grey-1: #344054;
+  --grey-2: hsl(216, 18%, 34%);
+  --grey-3: hsl(221, 13%, 46%);
+  --red-1: #d51919;
   --grey-15: #e7e7ed;
   --purple: #6554af;
   --yellow: #e5c209;
   --purple-100: #525183;
   --orange-1: #e7853e;
   /* Font settings */
-  --primary-font: "FPL Neu", helvetica;
+  --primary-font: "Inter", helvetica;
   --secondary-font: "Bon Foyage DEMO", serif;
 
-  --border-radius-xl: 100px;
+  --radius-xl: 20px;
   /* Z-Index settings */
   --header-z-index: 1000;
   --sidebar-z-index: 1500;
@@ -75,26 +75,6 @@
   /* Make the text transparent, so the background shows through */
   -webkit-text-fill-color: transparent;
   color: transparent;
-}
-
-.black-bg-gradient {
-  /* Set the gradient as the background */
-  background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    #121212;
-}
-
-.alt-black-bg-gradient {
-  /* Set the gradient as the background */
-  background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.24) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    #000;
 }
 
 body {
@@ -196,4 +176,15 @@ ol.ordered-list {
   to {
     opacity: 1;
   }
+}
+
+.header-1 {
+  color: var(--Base-White, #fff);
+  /* Display xl/Semibold */
+  font-family: Inter;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 72px; /* 120% */
+  letter-spacing: -1.2px;
 }

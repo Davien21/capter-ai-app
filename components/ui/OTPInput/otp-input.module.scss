@@ -1,0 +1,74 @@
+@use "../../../variables" as variables;
+
+.container {
+  max-width: 304px;
+  margin: auto;
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  &.error {
+    input {
+      border-color: var(--red-1);
+      box-shadow: 0 0 0 3px #e84c4c30;
+      animation: animate_shake 0.15s ease-in-out 0s 2;
+    }
+  }
+  &.success {
+    input {
+      border-color: var(--purple, #6554c0);
+      box-shadow: 0 0 0 3px rgba(101, 84, 175, 0.2);
+    }
+  }
+  &.idle {
+    display: block;
+    input {
+    }
+  }
+  &.loading {
+    display: block;
+
+    input {
+      // background-color: var(--grey-1);
+      // color: var(--grey-15);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.container input {
+  font-size: 20px;
+  width: 100%;
+  color: hsl(var(--primary));
+  // width: 35px;
+  height: 44px;
+  padding: 4px 2px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid hsl(var(--primary));
+  @media screen and (min-width: 320px) {
+    width: 56px;
+    height: 56px;
+  }
+  @media screen and (min-width: 640px) {
+    font-size: 32px;
+    width: 64px;
+    height: 72px;
+    border-radius: 10px;
+  }
+}
+
+.container input:focus {
+  outline: none;
+  border-color: var(--purple, #6554c0);
+  box-shadow: 0 0 0 3px rgba(101, 84, 175, 0.2);
+  // add pulsing effect with box shadow
+}
+
+.container .success {
+  border-color: green;
+}
+
+.container .error {
+  border-color: red;
+}

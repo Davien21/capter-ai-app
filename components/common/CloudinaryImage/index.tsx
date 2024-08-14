@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { getBlurPath } from "../../../utils/img-blur-path";
+import { getBlurPath } from "../../../utilities/img-blur-path";
 import { useIsClient } from "usehooks-ts";
 
 type ComponentProps = {

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./styles.module.scss";
 
-const PageLoader = () => {
+export const PageLoader = () => {
   return (
     <div
       className={`${styles["container"]} h-screen flex items-center justify-center `}
@@ -11,5 +11,3 @@ const PageLoader = () => {
     </div>
   );
 };
-
-export { PageLoader };

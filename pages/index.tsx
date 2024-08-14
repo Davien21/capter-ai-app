@@ -3,11 +3,24 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { Header, Footer } from "components";
+// import { Header, Footer } from "components";
 import styles from "./home-page.module.scss";
 import { GenerateTweet, GetAuthUrl, PostTweet } from "services/twitterService";
 import { feministTweets, productivityTweets } from "data/dummy";
 import { toast } from "sonner";
+import { Input } from "components/ui/input";
+import { Button } from "components/ui/button";
+import { Textarea } from "components/ui/textarea";
+import { Header } from "components/common/Header";
+import { Footer } from "components/common/Footer";
+import { getServerErrorObject } from "utilities/server-error-middleware";
+import { IHTTPErrorResponse } from "interfaces";
+import { UnAuthorizedHTTPError } from "utilities/http-errors";
+import { GetDashboardHomeDetails } from "services/userService";
+import { GetServerSideProps } from "next";
+import { SWRConfig } from "swr";
+
+// import { Input } from "components/ui/input";
 
 interface IFormInput {
   topic?: string;
@@ -39,9 +52,9 @@ const schema = yup
   })
   .required();
 
-export default function Index() {
+function DashboardHome() {
   const [generatedTweet, setgeneratedTweet] = useState("");
-  const [currentSample, setCurrentSample] = useState(productivityTweets);
+  const [currentSample, setCurrentSample] = useState(feministTweets);
   const [isLoading, setisLoading] = useState(false);
   const [isPosting, setIsPosting] = useState(false);
   const [messages, setMessages] = useState([
@@ -151,81 +164,88 @@ export default function Index() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className={`${styles["container"]} flex-1`}>
-        <div>
+        <div className="mt-1">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col max-w-[800px] m-auto gap-5"
           >
-            <input {...register("topic")} placeholder="Enter a topic" />
+            <Input {...register("topic")} placeholder="Enter a topic" />
             <p>{errors.topic?.message}</p>
             <div className="grid grid-cols-3 gap-4">
-              <textarea
+              <Textarea
                 {...register("tweet1")}
                 placeholder="Enter tweet 1"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet2")}
                 placeholder="Enter tweet 2"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet3")}
                 placeholder="Enter tweet 3"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet4")}
                 placeholder="Enter tweet 4"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet5")}
                 placeholder="Enter tweet 5"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet6")}
                 placeholder="Enter tweet 6"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet7")}
                 placeholder="Enter tweet 7"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet8")}
                 placeholder="Enter tweet 8"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet9")}
                 placeholder="Enter tweet 9"
                 rows={3}
               />
-              <textarea
+              <Textarea
                 {...register("tweet10")}
                 placeholder="Enter tweet 10"
                 rows={3}
               />
             </div>
 
-            <button type="submit">
+            <Button type="submit">
               {isLoading ? "Loading" : "Generate Tweet"}
-            </button>
+            </Button>
           </form>
           {generatedTweet && (
             <div className="max-w-[800px] mx-auto mt-2">
               <p className="text-center">Generated Tweet:</p>
               <p>{generatedTweet}</p>
-              <button
+              <Button
                 type="submit"
                 className="mt-4 p-[1rem!important]"
                 onClick={handlePostTweet}
               >
                 {isPosting ? "Loading" : "Post Tweet"}
-              </button>
+              </Button>
+              <Button
+                type="submit"
+                className="mt-4 p-[1rem!important]"
+                onClick={handlePostTweet}
+              >
+                {isPosting ? "Scheduling" : "Schedule Tweet"}
+              </Button>
             </div>
           )}
         </div>
@@ -234,3 +254,41 @@ export default function Index() {
     </div>
   );
 }
+
+export default function DashboardHomePage({ fallback }: any) {
+  return (
+    <SWRConfig value={{ fallback }}>
+      <DashboardHome />
+    </SWRConfig>
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const authToken = context.req.cookies["cai-auth-tk"];
+    if (!authToken) throw new UnAuthorizedHTTPError();
+    const response = await GetDashboardHomeDetails(authToken);
+
+    return {
+      props: {
+        fallback: {
+          [`/api/users/home`]: response,
+        },
+      },
+    };
+  } catch (error) {
+    const httpError = error as IHTTPErrorResponse;
+    console.log(httpError);
+    if (typeof httpError === "string") {
+      if ((httpError as any).includes("FetchError")) {
+        return {
+          redirect: {
+            destination: "/500",
+            permanent: false,
+          },
+        };
+      }
+    }
+    return await getServerErrorObject(httpError.status);
+  }
+};

@@ -1,15 +1,15 @@
 import { AppProps } from "next/app";
 
-import "tailwindcss/tailwind.css";
-
+import "styles/globals.css";
 import "../index.scss";
 
 import Head from "next/head";
 import PageHeadSetup from "../pageHeads/pageHeadSetup";
-import { PageLoader } from "components";
+// import { PageLoader } from "components";
 import { useRouteChangeHandler } from "hooks";
 import { NextPageWithLayout } from "interfaces";
 import { Toaster } from "sonner";
+import { PageLoader } from "components/features/PageLoader";
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;

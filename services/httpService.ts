@@ -25,21 +25,12 @@ axios.interceptors.response.use(undefined, (error: AxiosError) => {
   return Promise.reject(error);
 });
 
-export function setJwt(jwt: string) {
-  axios.defaults.headers.common["rollover-auth-token"] = jwt;
-}
-
-export function getJwt() {
-  return localStorage.getItem("rollover-auth-token") || "";
-}
-
 const httpService = {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
   patch: axios.patch,
-  setJwt,
 };
 
 export default httpService;

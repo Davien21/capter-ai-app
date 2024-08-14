@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import { IAPIResponse } from "interfaces";
+import { toast } from "sonner";
 
 export const filledArray = (length: number, value: any) => {
   return Array.from({ length }, () => value);
@@ -26,7 +27,7 @@ export function handleAxiosError(error: any) {
   }
   if (message === "Please verify your account") {
   } else {
-    // toaster.error(message);
+    toast.error(message);
     return message;
   }
   return message;

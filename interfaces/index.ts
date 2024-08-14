@@ -53,3 +53,23 @@ type NestedKeys<T> = T extends object
         : `${K}.${StringKeys<T[K]>}`;
     }[StringKeys<T>]
   : never;
+
+export interface IProfileUpdate {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface ISignup {
+  email: string;
+  password: string;
+  name: string;
+  // otp?: string;
+}
+
+export type IComponentState = 'idle' | 'success' | 'error' | 'loading';
